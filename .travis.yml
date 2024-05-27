@@ -1,0 +1,16 @@
+sudo: required
+
+language: generic
+
+services:
+  - docker
+
+before_install:
+  - echo "starttttt"
+  - docker build -t smilehi/docker-react-app -f Dockerfile .
+
+script:
+  - docker run -e CI=true smilehi/docker-react-app npm run test -- --coverage
+
+after_success:
+  - echo "Success"
